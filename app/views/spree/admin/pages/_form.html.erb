@@ -16,11 +16,16 @@
         <%= f.text_field :slug, class: 'form-control' %>
         <%= f.error_message_on :slug %>
       </div>
+      <div class="form-group">
+        <%= f.label :meta_title %>
+        <%= f.text_field :meta_title, class: 'form-control' %>
+        <%= f.error_message_on :meta_title %>
+      </div>
 
       <div class="form-group">
-        <%= f.label :body %> <span class="required">*</span>
-        <%= f.cktext_area :body, rows: 12, class: 'form-control' %>
-        <%= f.error_message_on :body %>
+        <%= f.label :meta_keywords %>
+        <%= f.text_field :meta_keywords, class: 'form-control' %>
+        <%= f.error_message_on :meta_keywords %>
       </div>
     </div>
 
@@ -40,45 +45,45 @@
         <%= f.number_field :position, min: 0, class: 'form-control' %>
       </div>
 
-      <div class="checkbox">
+      <div class="checkbox checkbox-static-page-visibility">
         <%= f.label :show_in_sidebar do %>
           <%= f.check_box :show_in_sidebar %>
           <%= Spree::Page.human_attribute_name(:show_in_sidebar) %>
         <% end %>
       </div>
 
-      <div class="checkbox">
+      <div class="checkbox checkbox-static-page-visibility">
         <%= f.label :show_in_header do %>
           <%= f.check_box :show_in_header %>
           <%= Spree::Page.human_attribute_name(:show_in_header) %>
         <% end %>
       </div>
 
-      <div class="checkbox">
+      <div class="checkbox checkbox-static-page-visibility">
         <%= f.label :show_in_footer do %>
           <%= f.check_box :show_in_footer %>
           <%= Spree::Page.human_attribute_name(:show_in_footer) %>
         <% end %>
       </div>
 
-      <div class="checkbox">
+      <div class="checkbox checkbox-static-page-visibility">
         <%= f.label :visible do %>
           <%= f.check_box :visible %>
           <%= Spree::Page.human_attribute_name(:visible) %>
         <% end %>
       </div>
 
-      <div class="checkbox">
+      <div class="checkbox checkbox-static-page-visibility">
         <%= f.label :render_layout_as_partial do %>
           <%= f.check_box :render_layout_as_partial %>
           <%= Spree::Page.human_attribute_name(:render_layout_as_partial) %>
         <% end %>
       </div>
 
-      <div class="form-group">
-        <%= f.label :stores, plural_resource_name(Spree::Store) %>
+      <div class="checkbox checkbox-static-page-visibility">
+        <%# <%= f.label :stores, plural_resource_name(Spree::Store) %1> %>
         <% Spree::Store.all.each do |store| %>
-          <div class="checkbox">
+          <div class="checkbox checkbox-static-page-visibility">
             <%= f.label store.name.downcase.to_sym do %>
               <%= check_box_tag 'page[store_ids][]', store.id, @page.stores.include?(store) %>
               <%= store.name %>
@@ -92,21 +97,16 @@
   <div class="row" data-hook="admin_page_form_meta">
     <div class="col-md-12">
       <div class="form-group">
-        <%= f.label :meta_title %>
-        <%= f.text_field :meta_title, class: 'form-control' %>
-        <%= f.error_message_on :meta_title %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :meta_keywords %>
-        <%= f.text_field :meta_keywords, class: 'form-control' %>
-        <%= f.error_message_on :meta_keywords %>
-      </div>
-
-      <div class="form-group">
         <%= f.label :meta_description %>
         <%= f.text_field :meta_description, class: 'form-control' %>
         <%= f.error_message_on :meta_description %>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label :body %> <span class="required">*</span>
+        <%= f.cktext_area :body, rows: 12, class: 'form-control' %>
+        <%= f.error_message_on :body %>
       </div>
     </div>
   </div>

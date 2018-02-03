@@ -1,3 +1,4 @@
-/*
- *= require spree/backend
-*/
+.checkbox.checkbox-static-page-visibility {
+  display: inline;
+  margin-right: 30px;
+}
