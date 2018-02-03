@@ -1,4 +1,7 @@
 class Spree::Page < ActiveRecord::Base
+  extend Mobility
+  translates :title, type: :string, fallbacks: { en: :es, es: :en }, fallthrough_accessors: true
+  translates :body, type: :string, fallbacks: { en: :es, es: :en }, fallthrough_accessors: true
   default_scope { order(position: :asc) }
 
   has_and_belongs_to_many :stores, join_table: 'spree_pages_stores'
@@ -18,10 +21,6 @@ class Spree::Page < ActiveRecord::Base
 
   before_save :update_positions_and_slug
 
-  translates :title, :body, :slug, :layout, :foreign_link, :meta_keywords, :meta_title, :meta_description,
-             fallbacks_for_empty_translations: true
-
-  include SpreeGlobalize::Translatable
 
   def initialize(*args)
     super(*args)
