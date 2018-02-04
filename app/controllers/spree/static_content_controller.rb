@@ -6,7 +6,7 @@ module Spree
     layout :determine_layout
 
     def show
-      @page = Spree::Page.joins(:translations).by_store(current_store).visible.find_by!(slug: request.path)
+      @page = Spree::Page.by_store(current_store).visible.find_by!(slug: request.path)
     end
 
     private
