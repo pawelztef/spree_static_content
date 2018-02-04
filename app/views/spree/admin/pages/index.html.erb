@@ -1,37 +1,38 @@
-<% content_for :page_title do %>
-  <%= plural_resource_name(Spree::Page) %>
-<% end %>
+<div class="row">
+  <% content_for :page_title do %>
+    <%= plural_resource_name(Spree::Page) %>
+  <% end %>
 
-<% content_for :page_actions do %>
-  <%= button_link_to Spree.t(:new_page, scope: :static_content), new_object_url, icon: 'plus', class: 'btn-primary', id: 'admin_new_page' %>
-  <%= render 'mobility' %>
-<% end %>
+  <% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:new_page, scope: :static_content), new_object_url, icon: 'plus', class: 'btn-primary', id: 'admin_new_page' %>
+    <%= render 'mobility' %>
+  <% end %>
+</div>
 
 <% if @pages.any? %>
   <table class="table" id="listing_pages" data-hook>
     <colgroup>
+      <col style="width: 5%">
       <col style="width: 40%">
-      <col style="width: 35%">
-      <col style="width: 10%">
+      <col style="width: 40%">
       <col style="width: 15%">
     </colgroup>
     <thead>
       <tr data-hook="admin_pages_index_headers">
-        <th><%= Spree::Page.human_attribute_name(:title) %></th>
+        <th><%= Spree.t(:visible)  %></th>
+        <th><%= Spree.t(:title) %></th>
         <th><%= Spree.t(:link, scope: :static_content) %></th>
-        <th class="text-center"><%= Spree::Page.human_attribute_name(:visible) %></th>
-        <th data-hook="admin_pages_index_header_actions" class="actions"></th>
+        <th><%= Spree.t("Actions") %></th>
       </tr>
     </thead>
     <tbody>
       <% @pages.each do |page| %>
         <tr data-hook="admin_pages_index_rows" class="<%= cycle('odd', 'even') %>" id="<%= dom_id page %>">
+          <td class="align-center text-center"><%= show_visibility page %></td>
           <td><%= page.title %></td>
           <td><%= link_to page.link, page.link, target: '_blank' %></td>
-          <td class="text-center"><%= content_tag(:i, '', class: 'icon icon-ok') if page.visible %></td>
-          <td class="actions text-right" data-hook="admin_pages_index_row_actions">
+          <td class="actions" data-hook="admin_pages_index_row_actions">
             <%= link_to_edit page, no_text: true %>
-            <%= link_to '', spree.admin_translations_path('page', page.id), class: 'btn btn-primary btn-sm icon icon-translate with-tip', data: { 'original-title' => Spree.t(:'i18n.translations') } %>
             <%= link_to_delete page, no_text: true %>
           </td>
         </tr>

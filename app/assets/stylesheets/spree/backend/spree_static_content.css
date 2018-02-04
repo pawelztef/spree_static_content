@@ -1,3 +1,6 @@
 /*
  *= require spree/backend
 */
+.glyphicon-check, .glyphicon-unchecked {
+  font-size: 1em;
+}

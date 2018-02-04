@@ -1,11 +1,10 @@
 module Spree
   module Admin
     class PagesController < ResourceController
-      helper 'spree/admin/pages'
       before_action :set_static_page_mobility
+      helper 'spree/pages'
 
       def index
-        byebug
         @pages = Spree::Page.all
       end
 
@@ -42,7 +41,7 @@ module Spree
       private
 
       def page_params
-        params.require(:page).premit!
+        params.require(:page).permit!
       end
 
       def set_static_page_mobility
