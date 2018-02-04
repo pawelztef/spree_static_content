@@ -1,7 +1,9 @@
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
     resources :pages do
-      patch :translate, on: :member
+      collection do
+        post 'mobility'
+      end
     end
   end
   constraints(Spree::StaticPage) do

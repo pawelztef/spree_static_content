@@ -2,3 +2,6 @@
   display: inline;
   margin-right: 30px;
 }
+.glyphicon-check, .glyphicon-unchecked {
+  font-size: 1em;
+}

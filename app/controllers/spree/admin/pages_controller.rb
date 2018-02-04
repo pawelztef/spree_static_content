@@ -1,19 +1,53 @@
 module Spree
   module Admin
     class PagesController < ResourceController
-      def translate
-        page = Spree::Page.find(params[:id])
-        page.update update_page_attribute
-        redirect_to spree.admin_pages_path
+      before_action :set_static_page_mobility
+      helper 'spree/pages'
+
+      def index
+        @pages = Spree::Page.all
+      end
+
+      def edit
+        @page = Spree::Page.find(params[:id])
+      end
+
+      def update
+        @page = Spree::Page.find(params[:id])
+        if @page.update(page_params)
+          flash[:success]=flash_message_for(@page, :successfully_updated)
+          redirect_to admin_pages_url
+        else
+          render :new
+        end
+      end
+
+      def create
+        @page = Spree::Page.new(page_params)
+        if @page.save
+          flash[:success] = flash_message_for(@page, :successfully_created)
+          redirect_to admin_pages_url
+        else
+          flash[:error] = flash_message_for(@page, :not_created)
+          render :new
+        end
+      end
+
+      def mobility
+        session[:static_page_mobility_locale] = params[:mobility_locale]
+        redirect_to admin_pages_url
       end
 
       private
-      def update_page_attribute
-        params.require(:page).permit(permitted_params)
+
+      def page_params
+        params.require(:page).permit!
       end
 
-      def permitted_params
-        [:translations_attributes => [:id, :title, :body, :slug, :layout, :foreign_link, :meta_keywords, :meta_title, :meta_description]]
+      def set_static_page_mobility
+        if session[:static_page_mobility_locale]
+          Mobility.locale = session[:static_page_mobility_locale]
+        end
       end
     end
   end
