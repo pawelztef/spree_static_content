@@ -1,0 +1,5 @@
+<%= form_tag mobility_admin_pages_path, id: 'mobility_static_page_form'  do  %>
+  <%= select_tag :mobility_locale, options_for_select(set_locales_array, Mobility.locale), class: "form-control mobility-select2" %>
+  <%# <%= submit_tag 'submit' %1> %>
+<% end %>
+

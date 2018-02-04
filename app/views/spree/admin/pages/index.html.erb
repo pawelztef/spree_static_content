@@ -4,6 +4,7 @@
 
 <% content_for :page_actions do %>
   <%= button_link_to Spree.t(:new_page, scope: :static_content), new_object_url, icon: 'plus', class: 'btn-primary', id: 'admin_new_page' %>
+  <%= render 'mobility' %>
 <% end %>
 
 <% if @pages.any? %>
