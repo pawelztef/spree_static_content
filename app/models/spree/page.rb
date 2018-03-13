@@ -1,7 +1,7 @@
 class Spree::Page < ActiveRecord::Base
   extend Mobility
-  translates :title, type: :string, fallbacks: { en: :es, es: :en }, fallthrough_accessors: true
-  translates :body, type: :string, fallbacks: { en: :es, es: :en }, fallthrough_accessors: true
+  translates :title, type: :string, fallbacks: { pl: :en, en: :pl }, fallthrough_accessors: true
+  translates :body, type: :string, fallbacks: { pl: :en, en: :pl }, fallthrough_accessors: true
   translates :slug, type: :string, fallthrough_accessors: true
   default_scope { order(position: :asc) }
 

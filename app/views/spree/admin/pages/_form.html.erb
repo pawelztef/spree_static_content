@@ -30,9 +30,17 @@
     </div>
 
     <div class="col-md-6" data-hook="admin_page_form_right">
-      <div class="form-group">
-        <%= f.label :layout %>
-        <%= f.text_field :layout, class: 'form-control' %>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="form-group">
+            <%= f.label :layout %>
+            <%= f.text_field :layout, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <%= f.label :mob_loc, Spree.t(:locale) %>
+          <h2 class="mob-bdg"><span class="label label-info"><%= Mobility.locale %></span></h2>
+        </div>
       </div>
 
       <div class="form-group">
@@ -92,6 +100,7 @@
         <% end %>
       </div>
     </div>
+
   </div>
 
   <div class="row" data-hook="admin_page_form_meta">

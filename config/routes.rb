@@ -6,7 +6,7 @@ Spree::Core::Engine.add_routes do
       end
     end
   end
-  constraints(Spree::StaticPage) do
-    get '/(*path)', to: 'static_content#show', as: 'static'
+  namespace :my_page do
+      get '/:slug', to: 'static_content#show', as: 'static'
   end
 end
