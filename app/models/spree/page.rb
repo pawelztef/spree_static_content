@@ -1,7 +1,8 @@
 class Spree::Page < ActiveRecord::Base
   extend Mobility
-  translates :title, type: :string, fallbacks: { en: :es, es: :en }, fallthrough_accessors: true
-  translates :body, type: :string, fallbacks: { en: :es, es: :en }, fallthrough_accessors: true
+  translates :title, type: :string, fallbacks: { pl: :en, en: :pl }, fallthrough_accessors: true
+  translates :body, type: :string, fallbacks: { pl: :en, en: :pl }, fallthrough_accessors: true
+  translates :slug, type: :string, fallthrough_accessors: true
   default_scope { order(position: :asc) }
 
   has_and_belongs_to_many :stores, join_table: 'spree_pages_stores'
@@ -32,11 +33,25 @@ class Spree::Page < ActiveRecord::Base
     foreign_link.blank? ? slug : foreign_link
   end
 
+  def create_slug
+    SpreeI18n::Config.available_locales.each do |loc|
+      if self.slug(locale: loc).blank?
+        Mobility.with_locale(loc) do
+          self.slug = title.parameterize if title
+        end
+      else 
+        self.slug = slug.parameterize
+      end
+    end
+  end
+
   private
 
+  def find_by_slug!(slug)
+    self.i18n.find_by(slug: slug)
+  end
+
   def update_positions_and_slug
-    # Ensure that all slugs start with a slash.
-    slug.prepend('/') if not_using_foreign_link? && !slug.start_with?('/')
     return if new_record?
     return unless (prev_position = Spree::Page.find(id).position)
     if prev_position > position
