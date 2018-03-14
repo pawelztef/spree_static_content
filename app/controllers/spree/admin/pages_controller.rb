@@ -26,6 +26,7 @@ module Spree
       def create
         @page = Spree::Page.new(page_params)
         @page.create_slug
+        @page.slug = @page.slug.parameterize
         if @page.save
           flash[:success] = flash_message_for(@page, :successfully_created)
           redirect_to admin_pages_url
