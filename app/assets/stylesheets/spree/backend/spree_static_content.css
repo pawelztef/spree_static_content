@@ -5,3 +5,14 @@
 .glyphicon-check, .glyphicon-unchecked {
   font-size: 1em;
 }
+.page-title-wrp {
+  display: flex;
+}
+.page-title-wrp span {
+}
+.page-title-wrp span.text-muted {
+  margin-left: 10px;
+  font-size: .9em;
+  position: relative;
+  top: 1px;
+}

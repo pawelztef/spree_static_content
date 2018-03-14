@@ -1,5 +1,8 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:editing_resource, resource: Spree::Page.model_name.human) %>
+  <div class="page-title-wrp">
+    <%= Spree.t(:editing_resource, resource: Spree::Page.model_name.human) %>: <%= @page.title %>
+    <span class="text-muted">(<%= Mobility.locale %>)</span>
+  </div>
 <% end %>
 
 <%= render 'form', resource: @page %>
